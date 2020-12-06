@@ -32,7 +32,10 @@ class Board:
         return self._board[row_index][column_index].get_piece() is None
 
 
-    def get_array(self, sign: str):
-        return np.array([[int(field.is_sign(sign)) for field in row] for row in self._board])
+    def get_array(self, sign: str) -> np.array:
+        return np.array([[int(field.is_sign(sign)) for field in row] for row in self._board], dtype=np.float32)
 
+
+    def get_array_by_signs(self, signs: list) -> np.array:
+        return np.stack((self.get_array(sign) for sign in signs))
 

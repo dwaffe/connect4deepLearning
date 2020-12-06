@@ -4,7 +4,7 @@ import numpy as np
 from scipy.signal import convolve2d
 
 
-horizontal_kernel = np.array([[ 1, 1, 1, 1]])
+horizontal_kernel = np.array([[1, 1, 1, 1]])
 vertical_kernel = np.transpose(horizontal_kernel)
 diag1_kernel = np.eye(4, dtype=np.uint8)
 diag2_kernel = np.fliplr(diag1_kernel)
