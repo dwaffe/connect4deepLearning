@@ -8,6 +8,7 @@ class Board:
         self._rows = rows
         self._columns = columns
         self._board = [[Field() for i in range(columns)] for j in range(rows)]
+        self._move_counter = 0
         
 
     def print(self):
@@ -26,6 +27,7 @@ class Board:
 
     def put_piece(self, column_index: int, row_index: int, piece: Piece):
         self._board[row_index][column_index].put_piece(piece)
+        self._move_counter += 1
 
 
     def is_empty(self, column_index: int, row_index: int) -> bool:
@@ -38,4 +40,8 @@ class Board:
 
     def get_array_by_signs(self, signs: list) -> np.array:
         return np.stack((self.get_array(sign) for sign in signs))
+
+
+    def get_move_counter(self) -> int:
+        return self._move_counter
 

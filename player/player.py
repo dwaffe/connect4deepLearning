@@ -4,7 +4,7 @@ from board.board import Board
 from connect4Logic.game import MAX_COLUMNS
 
 class Player:
-    def __init__(self, sign: str, color: str) -> None:
+    def __init__(self, sign: str, color: str = 'white') -> None:
         self._piece = Piece(sign, color)
 
 

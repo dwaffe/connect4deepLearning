@@ -1,4 +1,4 @@
-from connect4Logic.game import MAX_ROWS, MAX_COLUMNS
+from connect4Logic.game import MAX_ROWS, MAX_COLUMNS, SIGN_PLAYER_ONE, SIGN_PLAYER_TWO
 from board.board import Board
 import numpy as np
 from scipy.signal import convolve2d
@@ -19,19 +19,21 @@ def is_valid_move(board: Board, move: int) -> bool:
 
 
 def is_game_over(board: Board) -> bool:
-    if is_board_is_full(board) or is_winning(board, 'X') or is_winning(board, 'O'):
+    if is_winning(board, SIGN_PLAYER_ONE) or is_winning(board, SIGN_PLAYER_TWO) or is_board_is_full(board):
         return True
 
 
 def is_board_is_full(board: Board) -> bool:
-    for column in range(MAX_COLUMNS):
-        if board.is_empty(column, 0):
-            return False
+    if board.get_move_counter() < 42: 
+        return False
 
     return True
 
 
 def is_winning(board: Board, sign: str) -> bool:
+    if board.get_move_counter() < 7: 
+        return False
+
     board = board.get_array(sign)
     for kernel in kernels:
         if (convolve2d(board, kernel, mode='valid') == 4).any():
